@@ -37,6 +37,62 @@ const postController = {
       });
     }
   }),
+  getPosts: asyncHandler(async (req, res) => {
+    const posts = await Post.find();
+    if (posts) {
+      return res.status(200).json({
+        status: 0,
+        message: "Get all post successfully",
+        data: posts,
+      });
+    }
+  }),
+  updatePost: asyncHandler(async (req, res) => {
+    const { slug } = req.params;
+    if (slug && req.body) {
+      const newSlug = await createSlug(req.body.title);
+      const postUpdate = await Post.findOneAndUpdate(
+        { slug },
+        { ...req.body, slug: newSlug },
+        {
+          new: true,
+        }
+      );
+      if (postUpdate) {
+        return res.status(201).json({
+          status: 0,
+          message: "Updated successfully",
+          data: postUpdate,
+        });
+      }
+    }
+  }),
+  likePost: asyncHandler(async (req, res) => {
+    const { slug } = req.params;
+    const id = req.user.id;
+    const post = await Post.findOne({ slug });
+    if (!post) {
+      return res.status(401).json({
+        status: -1,
+        message: "Like post fail",
+      });
+    }
+    if (!post?.likes?.includes(id)) {
+      post?.likes?.push(id);
+      await post.save();
+      return res.status(201).json({
+        status: 0,
+        message: "Like post successfully",
+      });
+    } else {
+      post.likes = post?.likes?.filter((item) => item !== id);
+      await post.save();
+      return res.status(201).json({
+        status: 0,
+        message: "Unlike post successfully",
+      });
+    }
+  }),
 };
 
 module.exports = postController;
