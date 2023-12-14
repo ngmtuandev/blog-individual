@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const createSlug = require("slug");
 const Post = require("../model/post.model");
+const Comment = require("../model/comment.model");
 const postController = {
   createPost: asyncHandler(async (req, res) => {
     const { title, content } = req.body;
@@ -92,6 +93,21 @@ const postController = {
         message: "Unlike post successfully",
       });
     }
+  }),
+  getCommentPost: asyncHandler(async (req, res) => {
+    const { slug } = req.params;
+    const comments = await Comment.find({ post: slug });
+    if (comments) {
+      return res.status(201).json({
+        status: 0,
+        message: "Get Comment post successfully",
+        data: comments,
+      });
+    }
+    return res.status(400).json({
+      status: 1,
+      message: "Get Comment post failure",
+    });
   }),
 };
 
