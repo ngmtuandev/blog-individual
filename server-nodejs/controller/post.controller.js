@@ -109,6 +109,26 @@ const postController = {
       message: "Get Comment post failure",
     });
   }),
+  uploadImagePost: asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    if (req.files) {
+      const newProduct = await Product.findByIdAndUpdate(
+        id,
+        {
+          $push: { img: { $each: req.files.map((item) => item.path) } },
+        },
+        { new: true }
+      );
+      console.log(newProduct);
+      if (newProduct) {
+        return res.status(201).json({
+          status: newProduct ? 0 : -1,
+          mess: newProduct ? "Cập nhập thành công" : "Cập nhập thất bại",
+          data: newProduct ? newProduct : "",
+        });
+      }
+    }
+  }),
 };
 
 module.exports = postController;

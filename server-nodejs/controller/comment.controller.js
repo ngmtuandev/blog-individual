@@ -24,6 +24,32 @@ const commentController = {
       });
     }
   }),
+  likeComment: asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const _id = req.user.id;
+    const comment = await Comment.findById(id);
+    if (!comment) {
+      return res.status(401).json({
+        status: -1,
+        message: "Like comment fail",
+      });
+    }
+    if (!comment?.likes?.includes(_id)) {
+      comment?.likes?.push(_id);
+      await comment.save();
+      return res.status(201).json({
+        status: 0,
+        message: "Like comment successfully",
+      });
+    } else {
+      comment.likes = comment?.likes?.filter((item) => item !== _id);
+      await comment.save();
+      return res.status(201).json({
+        status: 0,
+        message: "Unlike comment successfully",
+      });
+    }
+  }),
 };
 
 module.exports = commentController;

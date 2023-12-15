@@ -13,12 +13,10 @@ const commentSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "User",
     },
-    likes: [
-      {
-        type: mongoose.Types.ObjectId,
-        ref: "User",
-      },
-    ],
+    likes: {
+      type: [String],
+      default: [],
+    },
     reply: [
       {
         post: {
@@ -26,12 +24,10 @@ const commentSchema = new mongoose.Schema(
           ref: "Post",
         },
         content_reply: String,
-        like_reply: [
-          {
-            type: mongoose.Types.ObjectId,
-            ref: "User",
-          },
-        ],
+        like_reply: {
+          type: [String],
+          default: [],
+        },
       },
     ],
   },

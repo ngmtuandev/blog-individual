@@ -25,6 +25,7 @@ export default function ModelLogin({
   onOpen: any;
 }) {
   const setDataUser = useAuthStore((state: any) => state.setDataUser);
+  const setIsLogin = useAuthStore((state: any) => state.setIsLogin);
   async function createInvoice(formData: FormData) {
     const rawFormData = {
       username: formData.get("username"),
@@ -39,7 +40,7 @@ export default function ModelLogin({
 
     if (+response?.data?.status === 0) {
       const token = response?.data?.data?.token;
-      console.log(token);
+      setIsLogin(true);
       window.localStorage.setItem("user-login-blog", token);
       setDataUser();
       swal({
@@ -63,8 +64,9 @@ export default function ModelLogin({
             <>
               <ModalHeader className="flex flex-col gap-1">Sign Up</ModalHeader>
               <ModalBody>
-                <form action={createInvoice}>
+                <form className="flex-col gap-5" action={createInvoice}>
                   <Input
+                    className="mb-4"
                     autoFocus
                     endContent={
                       <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
@@ -101,7 +103,7 @@ export default function ModelLogin({
                       Close
                     </Button>
                     <Button type="submit" color="primary">
-                      Sign up
+                      Login
                     </Button>
                   </ModalFooter>
                 </form>

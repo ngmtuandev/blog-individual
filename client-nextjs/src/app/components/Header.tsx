@@ -8,10 +8,18 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+} from "@nextui-org/react";
+
 import ModelLogin from "../components/ModelLogin";
 import ModelSignUp from "../components/ModelSignUp";
 import { useAuthStore } from "../store/auth.store";
 import { User } from "@nextui-org/react";
+import { useEffect } from "react";
 
 export default function Layout() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -21,8 +29,14 @@ export default function Layout() {
     onOpenChange: onOpenChangeSignUp,
   } = useDisclosure();
   const dataUser = useAuthStore((state: any) => state.dataUser);
-  console.log("dataUser >>>>>", dataUser);
+  console.log("dataUser check new >>>>>", dataUser);
   const isLogin = useAuthStore((state: any) => state.isLogin);
+  console.log("is login >>>", isLogin);
+  const setDataUser = useAuthStore((state: any) => state.setDataUser);
+  const setIsLogin = useAuthStore((state: any) => state.setIsLogin);
+  useEffect(() => {
+    setDataUser();
+  }, []);
   return (
     <div>
       <div>
@@ -72,13 +86,35 @@ export default function Layout() {
           ) : (
             <NavbarContent justify="end">
               <NavbarItem className="hidden lg:flex">
-                <User
-                  name={dataUser?.name}
-                  description="Product Designer"
-                  avatarProps={{
-                    src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-                  }}
-                />
+                <Dropdown backdrop="blur">
+                  <DropdownTrigger
+                    onClick={() => {
+                      setDataUser(null);
+                    }}
+                  >
+                    <User
+                      name={dataUser?.name}
+                      description={dataUser?.username}
+                      avatarProps={{
+                        src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
+                      }}
+                    />
+                  </DropdownTrigger>
+                  <DropdownMenu variant="faded" aria-label="Static Actions">
+                    <DropdownItem key="new">New file</DropdownItem>
+                    <DropdownItem key="copy">Copy link</DropdownItem>
+                    <DropdownItem
+                      onClick={() => {
+                        setDataUser(null);
+                        setIsLogin(false);
+                        localStorage.removeItem("user-login-blog");
+                      }}
+                      key="edit"
+                    >
+                      Logout account
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
               </NavbarItem>
             </NavbarContent>
           )}

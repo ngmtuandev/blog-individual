@@ -62,6 +62,7 @@ export default function ModelSignUp({
               <ModalBody>
                 <form action={createInvoice}>
                   <Input
+                    className="mb-4"
                     autoFocus
                     endContent={
                       <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
@@ -75,6 +76,7 @@ export default function ModelSignUp({
                     endContent={
                       <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                     }
+                    className="mb-4"
                     label="Password"
                     placeholder="Enter your password"
                     type="password"

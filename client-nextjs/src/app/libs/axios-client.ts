@@ -1,7 +1,8 @@
+"use client";
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "https://hif.onrender.com/api/v1",
+  baseURL: "https://hif-api.onrender.com/api/v1",
 });
 
 axiosClient.interceptors.request.use(
