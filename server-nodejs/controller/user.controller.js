@@ -70,6 +70,19 @@ const userController = {
       }
     }
   }),
+  getMe: asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    if (id) {
+      const user = await User.findById(id).select("-password");
+      if (user) {
+        res.status(200).json({
+          status: 0,
+          message: "Get user successfully",
+          data: user,
+        });
+      }
+    }
+  }),
 };
 
 module.exports = userController;
