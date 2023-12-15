@@ -110,21 +110,19 @@ const postController = {
     });
   }),
   uploadImagePost: asyncHandler(async (req, res) => {
-    const { id } = req.params;
-    if (req.files) {
-      const newProduct = await Product.findByIdAndUpdate(
-        id,
-        {
-          $push: { img: { $each: req.files.map((item) => item.path) } },
-        },
+    const { slug } = req.params;
+    if (req.file) {
+      console.log("req file >>>", req.file);
+      const updatePost = await Post.findOneAndUpdate(
+        { slug },
+        { thumb: req.file.path },
         { new: true }
       );
-      console.log(newProduct);
-      if (newProduct) {
+      if (updatePost) {
         return res.status(201).json({
-          status: newProduct ? 0 : -1,
-          mess: newProduct ? "Cập nhập thành công" : "Cập nhập thất bại",
-          data: newProduct ? newProduct : "",
+          status: 0,
+          message: "Upload Image post successfully",
+          data: updatePost,
         });
       }
     }
