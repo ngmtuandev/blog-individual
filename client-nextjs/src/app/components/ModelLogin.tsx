@@ -41,7 +41,7 @@ export default function ModelLogin({
       const token = response?.data?.data?.token;
       console.log(token);
       window.localStorage.setItem("user-login-blog", token);
-      setDataUser(response?.data?.data?.user);
+      setDataUser();
       swal({
         title: `Login account successfully`,
         icon: "success",

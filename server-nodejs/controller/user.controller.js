@@ -71,7 +71,7 @@ const userController = {
     }
   }),
   getMe: asyncHandler(async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.user;
     if (id) {
       const user = await User.findById(id).select("-password");
       if (user) {
