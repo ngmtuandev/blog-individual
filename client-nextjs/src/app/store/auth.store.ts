@@ -6,6 +6,8 @@ export const useAuthStore = create((set) => ({
   isLogin:
     typeof window !== "undefined" && !!localStorage.getItem("user-login-blog"),
   setIsLogin: (isLogin: boolean) => set({ isLogin }),
+  token: null,
+  setToken: (token: string) => set({ token }),
   setDataUser: async () => {
     if (typeof window !== "undefined") {
       const token = localStorage.getItem("user-login-blog");

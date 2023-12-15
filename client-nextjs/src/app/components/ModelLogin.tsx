@@ -26,6 +26,7 @@ export default function ModelLogin({
 }) {
   const setDataUser = useAuthStore((state: any) => state.setDataUser);
   const setIsLogin = useAuthStore((state: any) => state.setIsLogin);
+  const setToken = useAuthStore((state: any) => state.setToken);
   async function createInvoice(formData: FormData) {
     const rawFormData = {
       username: formData.get("username"),
@@ -42,6 +43,7 @@ export default function ModelLogin({
       const token = response?.data?.data?.token;
       setIsLogin(true);
       window.localStorage.setItem("user-login-blog", token);
+      setToken(token);
       setDataUser();
       swal({
         title: `Login account successfully`,
