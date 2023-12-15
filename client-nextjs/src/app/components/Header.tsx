@@ -29,9 +29,7 @@ export default function Layout() {
     onOpenChange: onOpenChangeSignUp,
   } = useDisclosure();
   const dataUser = useAuthStore((state: any) => state.dataUser);
-  console.log("dataUser check new >>>>>", dataUser);
   const isLogin = useAuthStore((state: any) => state.isLogin);
-  console.log("is login >>>", isLogin);
   const setDataUser = useAuthStore((state: any) => state.setDataUser);
   const setIsLogin = useAuthStore((state: any) => state.setIsLogin);
   useEffect(() => {
@@ -42,10 +40,12 @@ export default function Layout() {
       <div>
         <Navbar>
           <NavbarBrand>
-            <div className="font-bold text-inherit sm:text-[30px] lg:text-[36px]">
-              <span>Hi</span>
-              <span className="text-primary">F</span>
-            </div>
+            <Link href="/">
+              <div className="font-bold text-inherit sm:text-[30px] lg:text-[36px]">
+                <span className="text-gray-900">Hi</span>
+                <span className="text-primary">F</span>
+              </div>
+            </Link>
           </NavbarBrand>
           <NavbarContent className="hidden sm:flex gap-4" justify="center">
             <NavbarItem>

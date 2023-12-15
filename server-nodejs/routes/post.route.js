@@ -6,7 +6,7 @@ const verifyAdmin = require("../middleware/verifyAdmin");
 const cloudDinary = require("../config/cloudDinary");
 router.post("/create", [verifyToken, verifyAdmin], postController.createPost);
 router.get("/", postController.getPosts);
-router.get("/:slug", [verifyToken], postController.getOnePost);
+router.get("/:slug", postController.getOnePost);
 router.put("/:slug", [verifyToken, verifyAdmin], postController.updatePost);
 router.put("/:slug/like", [verifyToken], postController.likePost);
 router.get("/:slug/comment", [verifyToken], postController.getCommentPost);
