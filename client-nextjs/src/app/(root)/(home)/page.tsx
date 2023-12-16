@@ -3,6 +3,9 @@ import { useAuthStore } from "@/app/store/auth.store";
 
 async function getPosts() {
   const res = await fetch("https://hif-api.onrender.com/api/v1/posts", {
+    next: {
+      revalidate: 0,
+    },
     method: "get",
     headers: {
       "Content-Type": "application/json",

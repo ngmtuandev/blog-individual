@@ -4,16 +4,17 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Link,
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+import React from "react";
 import {
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
 } from "@nextui-org/react";
+import Link from "next/link";
 
 import ModelLogin from "../components/ModelLogin";
 import ModelSignUp from "../components/ModelSignUp";
@@ -54,7 +55,7 @@ export default function Layout() {
               </Link>
             </NavbarItem>
             <NavbarItem isActive>
-              <Link href="#" aria-current="page">
+              <Link href="#" aria-current="true">
                 Customers
               </Link>
             </NavbarItem>
@@ -67,9 +68,9 @@ export default function Layout() {
           {!isLogin ? (
             <NavbarContent justify="end">
               <NavbarItem className="hidden lg:flex">
-                <Link href="#" onPress={onOpen}>
+                <Button href="#" onPress={onOpen}>
                   Login
-                </Link>
+                </Button>
               </NavbarItem>
               <NavbarItem>
                 <Button
@@ -87,11 +88,7 @@ export default function Layout() {
             <NavbarContent justify="end">
               <NavbarItem className="hidden lg:flex">
                 <Dropdown backdrop="blur">
-                  <DropdownTrigger
-                    onClick={() => {
-                      setDataUser(null);
-                    }}
-                  >
+                  <DropdownTrigger>
                     <User
                       name={dataUser?.name}
                       description={dataUser?.username}
@@ -100,8 +97,31 @@ export default function Layout() {
                       }}
                     />
                   </DropdownTrigger>
-                  <DropdownMenu variant="faded" aria-label="Static Actions">
+                  {/* <DropdownMenu aria-label="Static Actions">
                     <DropdownItem key="new">New file</DropdownItem>
+                    <DropdownItem key="copy">Copy link</DropdownItem>
+                    <DropdownItem key="edit">Edit file</DropdownItem>
+                    <DropdownItem
+                      key="delete"
+                      className="text-danger"
+                      color="danger"
+                    >
+                      Delete file
+                    </DropdownItem>
+                  </DropdownMenu> */}
+                  <DropdownMenu variant="faded" aria-label="Static Actions">
+                    {/* {+dataUser?.role === 1 ? (
+                      <DropdownItem key="new">
+                        <Link href="/create-blog">New post</Link>
+                      </DropdownItem>
+                    ) : (
+                      <React.Fragment></React.Fragment>
+                    )} */}
+                    <DropdownItem key="new">
+                      <Link href={+dataUser?.role === 1 ? "/create-blog" : "/"}>
+                        {dataUser?.role === 1 ? "New post" : "Home"}
+                      </Link>
+                    </DropdownItem>
                     <DropdownItem key="copy">Copy link</DropdownItem>
                     <DropdownItem
                       onClick={() => {
