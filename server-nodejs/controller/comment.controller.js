@@ -11,7 +11,7 @@ const commentController = {
         user: req.user.id,
       });
       if (newComment) {
-        return res.status(401).json({
+        return res.status(201).json({
           status: 0,
           message: "Comment successfully",
           data: newComment,
