@@ -1,22 +1,29 @@
+import DetailPost from "@/app/components/DetailPost";
+import Image from "next/image";
 import React from "react";
 
-async function getData() {
-  const res = await fetch("https://api.example.com/...");
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
+async function getData(slug: string) {
+  const res = await fetch(`https://hif-api.onrender.com/api/v1/posts/${slug}`, {
+    next: { revalidate: 0 },
+    cache: "force-cache",
+  });
 
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
 
   return res.json();
 }
 
-const page = async ({ params }: { params: { slug: string } }) => {
+const DetailPostPage = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
-  console.log("path name >>>>", slug);
-  return <div>Detail blog</div>;
+  let post = await getData(slug);
+  post = post?.data;
+  return (
+    <div>
+      <DetailPost post={post}></DetailPost>
+    </div>
+  );
 };
 
-export default page;
+export default DetailPostPage;
