@@ -57,14 +57,18 @@ export default function ModelComment({
                   Modal Title
                 </ModalHeader>
                 <ModalBody>
-                  <input name="text"></input>
+                  <input
+                    placeholder="Text"
+                    className="border-none outline-none placeholder:text-[24px] w-[100%] h-[40px]"
+                    name="text"
+                  ></input>
                 </ModalBody>
                 <ModalFooter>
                   <Button color="danger" variant="light" onPress={onClose}>
                     Close
                   </Button>
                   <Button type="submit" color="primary">
-                    Action
+                    Comment
                   </Button>
                 </ModalFooter>
               </form>
@@ -72,17 +76,17 @@ export default function ModelComment({
                 {comment &&
                   comment?.map((item: any) => {
                     return (
-                      <div key={item?._id}>
+                      <div className="mb-3 pb-3 border-b-1" key={item?._id}>
                         <div>
                           <User
-                            // name={dataUser?.name}
-                            // description={dataUser?.username}
+                            name={item?.user?.name}
+                            description={item?.user?.username}
                             avatarProps={{
                               src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
                             }}
                           />
                         </div>
-                        <span>{item?.text}</span>
+                        <span className="mt-2">{item?.text}</span>
                       </div>
                     );
                   })}

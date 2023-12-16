@@ -20,6 +20,7 @@ import ModelLogin from "../components/ModelLogin";
 import ModelSignUp from "../components/ModelSignUp";
 import { useAuthStore } from "../store/auth.store";
 import { User } from "@nextui-org/react";
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 export default function Layout() {
@@ -33,11 +34,13 @@ export default function Layout() {
   const isLogin = useAuthStore((state: any) => state.isLogin);
   const setDataUser = useAuthStore((state: any) => state.setDataUser);
   const setIsLogin = useAuthStore((state: any) => state.setIsLogin);
+  const pathname = usePathname();
   useEffect(() => {
     setDataUser();
   }, []);
+  console.log(pathname);
   return (
-    <div>
+    <div className="bg-white shadow-xl">
       <div>
         <Navbar>
           <NavbarBrand>
@@ -54,14 +57,25 @@ export default function Layout() {
                 Features
               </Link>
             </NavbarItem>
-            <NavbarItem isActive>
-              <Link href="#" aria-current="true">
-                Customers
+            <NavbarItem>
+              <Link
+                className={`${
+                  pathname == "/" ? "text-[#5eb670] font-medium" : ""
+                }`}
+                href="/"
+                aria-current="true"
+              >
+                Home
               </Link>
             </NavbarItem>
             <NavbarItem>
-              <Link color="foreground" href="#">
-                Integrations
+              <Link
+                className={`${
+                  pathname == "/profile" ? "text-[#5eb670] font-medium" : ""
+                }`}
+                href="/profile"
+              >
+                Profile
               </Link>
             </NavbarItem>
           </NavbarContent>

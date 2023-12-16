@@ -33,12 +33,6 @@ const DetailPost = ({ post }: { post: TPost }) => {
         ></img>
       </div>
       <div>
-        <div>
-          <h3 className="uppercase lg:text-[32px] font-semibold text-gray-800">
-            {post?.title}
-          </h3>
-          <div dangerouslySetInnerHTML={{ __html: post?.content }} />
-        </div>
         <div className="py-5 border-t-1 border-b-1 my-6">
           <div className="flex items-center gap-6">
             <span
@@ -52,6 +46,12 @@ const DetailPost = ({ post }: { post: TPost }) => {
             </span>
             <span>Like</span>
           </div>
+        </div>
+        <div>
+          <h3 className="uppercase lg:text-[32px] font-semibold text-gray-800">
+            {post?.title}
+          </h3>
+          <div dangerouslySetInnerHTML={{ __html: post?.content }} />
         </div>
       </div>
       <ModelComment
