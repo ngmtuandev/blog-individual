@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.wrapper {
+  width: 450px;
+  height: 450px;
+  transition: transform 0.3s ease-in-out;
+  position: fixed;
+  left: 30%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.wrapper2 {
+  width: 450px;
+  height: 450px;
+  transition: transform 0.3s ease-in-out;
+  position: fixed;
+  left: 30%;
+  top: 70%;
+  transform: translateX(-50%) translateY(-50%);
+}
