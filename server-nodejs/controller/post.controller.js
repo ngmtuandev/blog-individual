@@ -96,7 +96,9 @@ const postController = {
   }),
   getCommentPost: asyncHandler(async (req, res) => {
     const { slug } = req.params;
+    console.log("slug", slug);
     const comments = await Comment.find({ post: slug });
+    console.log("comment >>>", comments);
     if (comments) {
       return res.status(201).json({
         status: 0,

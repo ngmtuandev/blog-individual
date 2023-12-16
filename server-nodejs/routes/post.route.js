@@ -9,7 +9,7 @@ router.get("/", postController.getPosts);
 router.get("/:slug", postController.getOnePost);
 router.put("/:slug", [verifyToken, verifyAdmin], postController.updatePost);
 router.put("/:slug/like", [verifyToken], postController.likePost);
-router.get("/:slug/comment", [verifyToken], postController.getCommentPost);
+router.get("/:slug/comment", postController.getCommentPost);
 router.put(
   "/:slug/upload",
   [verifyToken],

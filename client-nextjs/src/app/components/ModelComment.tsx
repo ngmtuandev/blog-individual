@@ -8,29 +8,38 @@ import {
   Button,
 } from "@nextui-org/react";
 import axiosClient from "../libs/axios-client";
+import { useRouter } from "next/navigation";
 
 export default function ModelComment({
   isOpen,
   onOpen,
   onOpenChange,
   slug,
+  comment,
+  setValidate,
+  validate,
 }: {
   isOpen: any;
   onOpen: any;
   onOpenChange: any;
   slug: string;
+  comment: any;
+  setValidate: any;
+  validate: any;
 }) {
   const [scrollBehavior, setScrollBehavior] = React.useState<
     "inside" | "normal" | "outside" | undefined
   >("inside");
-
+  const router = useRouter();
   async function addComment(formData: FormData) {
     const rs = await axiosClient(`/comment/${slug}`, {
       method: "POST",
       data: { text: formData.get("text") },
     });
+    setValidate(!validate);
     console.log("rs : ", rs);
   }
+  console.log("test comment new >>>>", comment);
 
   return (
     <div className="flex w-[80%] flex-col gap-2">
@@ -39,6 +48,7 @@ export default function ModelComment({
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         scrollBehavior={scrollBehavior}
+        className="scroll-auto"
       >
         <ModalContent>
           {(onClose) => (
@@ -59,6 +69,16 @@ export default function ModelComment({
                   </Button>
                 </ModalFooter>
               </form>
+              <div>
+                {comment &&
+                  comment?.map((item: any) => {
+                    return (
+                      <div key={item?._id}>
+                        <span>{item?.text}</span>
+                      </div>
+                    );
+                  })}
+              </div>
             </>
           )}
         </ModalContent>
