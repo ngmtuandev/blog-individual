@@ -8,7 +8,7 @@ import { getBase64 } from "../helper/getBase64";
 const CreatePostPage = () => {
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
-  const [thumb, setThumb] = useState<string | undefined>("");
+  const [thumb, setThumb] = useState<any>("");
   let toolbarOptions = [
     ["bold", "italic", "underline", "strike"], // toggled buttons
     ["blockquote", "code-block"],
