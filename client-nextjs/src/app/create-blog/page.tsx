@@ -1,10 +1,13 @@
 "use client";
 import React from "react";
+import dynamic from "next/dynamic";
 import ReactQuill from "react-quill";
 import { useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import axiosClient from "../libs/axios-client";
 import { getBase64 } from "../helper/getBase64";
+const ReactQuillNoSSR = dynamic(() => import("react-quill"), { ssr: false });
+
 const CreatePostPage = () => {
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
@@ -70,7 +73,7 @@ const CreatePostPage = () => {
         />
         <img src={thumb}></img>
       </div>
-      <ReactQuill
+      <ReactQuillNoSSR
         onChange={handleQuillChange}
         modules={modules}
         theme="snow"
