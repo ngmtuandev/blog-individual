@@ -2,7 +2,7 @@ import { motion, useViewportScroll, useTransform } from "framer-motion";
 
 const FramerSquare = () => {
   return (
-    <div className="flex h-[100px] items-center justify-start">
+    <div className="flex items-center justify-start">
       <motion.div
         initial={{ opacity: 0.5, scale: 0.5, x: 0 }}
         animate={{

@@ -2,7 +2,7 @@ import { motion, useViewportScroll, useTransform } from "framer-motion";
 
 const FramerCircle = () => {
   return (
-    <div className="flex h-[100px] items-center justify-center">
+    <div className="flex  items-center justify-center">
       <motion.div
         initial={{ opacity: 0.5, scale: 0.5, x: 0 }}
         animate={{
