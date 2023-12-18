@@ -6,7 +6,7 @@ const FramerSquare = () => {
       <motion.div
         initial={{ opacity: 0.5, scale: 0.5, x: 0 }}
         animate={{
-          x: 300,
+          x: 150,
           y: 0,
           scale: 1,
           rotate: 300,
@@ -16,7 +16,7 @@ const FramerSquare = () => {
         whileHover={{ y: 30, x: 40, scale: 2 }}
         //   drag
       >
-        <div className="w-[200px] h-[200px] border-2 border-cyan-500"></div>
+        <div className="w-[200px] h-[200px] border-2 border-primary"></div>
       </motion.div>
     </div>
   );

@@ -5,10 +5,10 @@ import Framer2 from "../components/Framer2";
 import Framer3 from "../components/Framer3";
 import Framer4 from "../components/Framer4";
 import FramerCircle from "../components/FramerCircle";
+import FramerImgMe from "../components/FramerImgMe";
 import FramerInfo from "../components/FramerInfo";
 import FramerSquare from "../components/FramerSquare";
 import FramerTitle from "../components/FramerTitle";
-import Test from "../components/Test";
 
 const HomePage = () => {
   return (
@@ -16,10 +16,13 @@ const HomePage = () => {
       <FramerTitle></FramerTitle>
       <FramerSquare></FramerSquare>
       <FramerCircle></FramerCircle>
-      <div className="mt-[200px]">
+      <div className="-mt-10">
+        <FramerImgMe></FramerImgMe>
+      </div>
+      <div className="mt-[300px]">
         <Framer1></Framer1>
       </div>
-      <div className="mt-[300px] w-screen h-screen bg-black bg-opacity-25 flex justify-center items-center">
+      <div className="mt-[200px] w-screen h-screen bg-black bg-opacity-25 flex justify-center items-center">
         <FramerInfo></FramerInfo>
       </div>
       <div className="mt-[300px]">

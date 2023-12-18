@@ -7,21 +7,12 @@ import ModelComment from "./ModelComment";
 const DetailPost = ({ post }: { post: TPost }) => {
   const router = useRouter();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [comment, setComment] = useState([]);
-  const [validate, setValidate] = useState(false);
   const handleLikePost = async (slug: string) => {
     const res = await axiosClient.put(`/posts/${slug}/like`);
     if (res) {
       router.refresh();
     }
   };
-
-  useEffect(() => {
-    (async () => {
-      const rs = await axiosClient(`/posts/${post?.slug}/comment`);
-      setComment(rs?.data?.data);
-    })();
-  }, [validate]);
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -55,9 +46,6 @@ const DetailPost = ({ post }: { post: TPost }) => {
         </div>
       </div>
       <ModelComment
-        validate={validate}
-        setValidate={setValidate}
-        comment={comment}
         slug={post?.slug}
         isOpen={isOpen}
         onOpen={onOpen}

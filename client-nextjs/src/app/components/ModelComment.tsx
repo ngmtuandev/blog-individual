@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   Modal,
@@ -9,23 +10,30 @@ import {
 } from "@nextui-org/react";
 import axiosClient from "../libs/axios-client";
 import { User } from "@nextui-org/react";
+import useSWR from "swr";
+
+const getComment = async (url: string) => {
+  try {
+    const rs = await fetch(url);
+    const data = await rs.json();
+    console.log("data test ??", data);
+    return data;
+  } catch (error) {
+    console.error("Error fetching comments:", error);
+    throw error; // Re-throw the error to let SWR handle it
+  }
+};
 
 export default function ModelComment({
   isOpen,
   onOpen,
   onOpenChange,
   slug,
-  comment,
-  setValidate,
-  validate,
 }: {
   isOpen: any;
   onOpen: any;
   onOpenChange: any;
   slug: string;
-  comment: any;
-  setValidate: any;
-  validate: any;
 }) {
   const [scrollBehavior, setScrollBehavior] = React.useState<
     "inside" | "normal" | "outside" | undefined
@@ -35,10 +43,18 @@ export default function ModelComment({
       method: "POST",
       data: { text: formData.get("text") },
     });
-    setValidate(!validate);
+    mutate();
   }
 
-  console.log("comment : ", comment);
+  const { data, mutate, isLoading, error } = useSWR(
+    `https://hif-api.onrender.com/api/v1/posts/${slug}/comment`,
+    getComment
+  );
+  console.log("slug >>>", slug);
+  console.log("check data swr >>>", data);
+  if (error) {
+    console.error("Error fetching comments:", error);
+  }
 
   return (
     <div className="flex w-[80%] flex-col gap-2">
@@ -68,13 +84,13 @@ export default function ModelComment({
                     Close
                   </Button>
                   <Button type="submit" color="primary">
-                    Comment
+                    {isLoading ? "..." : "Comment"}
                   </Button>
                 </ModalFooter>
               </form>
               <div className="w-full h-auto overflow-auto scrollbar-none scrollbar-thumb-gray-900 scrollbar-track-gray-100 mb-5 px-8 flex flex-col gap-5">
-                {comment &&
-                  comment?.map((item: any) => {
+                {data &&
+                  data?.data?.map((item: any) => {
                     return (
                       <div className="mb-3 pb-3 border-b-1" key={item?._id}>
                         <div>

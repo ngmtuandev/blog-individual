@@ -16,11 +16,25 @@ const FramerTitle = () => {
         //   drag
       >
         <div className="w-[70%] flex-wrap">
-          <span className="text-gray-900">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus,
-            facere! Cumque id placeat omnis perspiciatis nostrum dicta ea eius
-            voluptatibus distinctio maiores quam, natus illo at iste, odit
-            corrupti temporibus!
+          <h3 className="font-bold text-[60px] text-primary">
+            Nguyễn Mạnh Tuấn
+          </h3>
+          <span className="text-gray-900 text-lg">
+            Chào tất cả mọi người, mình xin giới thiệu 1 chút về mình. Mình tên
+            là Nguyễn Mạnh Tuấn, mình sinh năm 2002 quê ở Đăk Lăk và hiện đang
+            học chuyên nghành Kĩ Thuật Máy Tính. Mình bắt đầu học lập trình
+            website vào năm 2 Đại học, vì đó là thời điểm dịch bệnh được ở nhà
+            nên mình khá rảnh, mình đã bắt đầu tìm hiểu về HTML, CSS sau đó thấy
+            nó tạo ra hình hình thù của 1 giao diện làm mình khá là phấn khích
+            và thúc đẩy mình tìm hiểu về Javascript và React JS. Đây cũng là nền
+            tảng cơ sở để mình bắt đầu học thêm nhiều thứ hay ho khác như Next
+            JS và Node JS. Mình làm trang website này khi mình bắt đầu tìm hiểu
+            về Next JS và muốn thực hành về nó, 1 phần muốn làm 1 trang Website
+            để giới thiệu bản thân mình đến với các bạn và anh chị nhà tuyển
+            dụng, một phẫn mình cũng muốn chia sẻ với các bạn về nhưng kiến thức
+            mình học và tìm hiểu được đến với các bạn khác cũng đang học như
+            mình. Mình hy vọng các bạn sẽ vui vẻ và tìm được điều gì đỏ tại
+            trang website này nhé.
           </span>
         </div>
       </motion.div>
