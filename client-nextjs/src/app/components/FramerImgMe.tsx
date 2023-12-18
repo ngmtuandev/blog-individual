@@ -3,7 +3,7 @@ import Image from "next/image";
 import profilePic from "../asset/image/me.png";
 const FramerImgMe = () => {
   return (
-    <div className="flex h-[100px] items-center justify-center">
+    <div className="flex -mt-40 items-center justify-center">
       <motion.div
         initial={{ opacity: 0.5, scale: 0.5, x: 0 }}
         animate={{

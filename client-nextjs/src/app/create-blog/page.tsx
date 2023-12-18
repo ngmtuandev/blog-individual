@@ -27,7 +27,7 @@ const CreatePostPage = () => {
 
     ["clean"],
   ];
-  const module = {
+  const modules = {
     toolbar: toolbarOptions,
   };
 
@@ -67,7 +67,7 @@ const CreatePostPage = () => {
       </div>
       <ReactQuill
         onChange={handleQuillChange}
-        modules={module}
+        modules={modules}
         theme="snow"
         value={value}
       />
