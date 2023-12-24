@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import dynamic from "next/dynamic";
-import ReactQuill from "react-quill";
 import { useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import axiosClient from "../libs/axios-client";
